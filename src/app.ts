@@ -10,6 +10,8 @@ import { DiceRollerContainerRuntimeFactory } from "./containerCode";
 import { IDiceRoller } from "./dataObject";
 import { renderDiceRoller } from "./view";
 
+import appConfig from './appConfig'
+
 // In interacting with the service, we need to be explicit about whether we're creating a new document vs. loading
 // an existing one.  We also need to provide the unique ID for the document we are creating or loading from.
 
@@ -17,10 +19,18 @@ import { renderDiceRoller } from "./view";
 // we'll choose to use the current timestamp.  We'll also choose to interpret the URL hash as an existing document's
 // ID to load from, so the URL for a document load will look something like http://localhost:8080/#1596520748752.
 // These policy choices are arbitrary for demo purposes, and can be changed however you'd like.
+//
+// React-Native
+// In order to allow sharing the document Id between web and RN views, we introduced an appConfig parameter.
 let createNew = false;
 if (location.hash.length === 0) {
-    createNew = true;
-    location.hash = Date.now().toString();
+    if(appConfig && appConfig.documentId) {
+        createNew = appConfig.createNew;
+        location.hash = appConfig.documentId;
+    } else {
+        createNew = true;
+        location.hash = Date.now().toString();
+    }
 }
 const documentId = location.hash.substring(1);
 document.title = documentId;
