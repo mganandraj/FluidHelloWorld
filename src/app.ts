@@ -28,7 +28,7 @@ if (location.hash.length === 0) {
         createNew = appConfig.createNew;
         location.hash = appConfig.documentId;
     } else {
-        createNew = true;
+        createNew = false;
         location.hash = Date.now().toString();
     }
 }

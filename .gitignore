@@ -2,3 +2,14 @@ dist
 node_modules
 *.log
 **/*.tsbuildinfo
+
+# Android/IntelliJ
+#
+android/app/build/
+android/.idea
+android/.gradle
+android/local.properties
+android/*.iml
+index.android.bundle
+
+built

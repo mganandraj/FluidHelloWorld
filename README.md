@@ -33,10 +33,16 @@ Then, start the RN dev server,
 npm run start
 ```
 
-Alternatively, the Javascript bundle can be generated to package it with the application package,
+Alternatively, the Javascript bundle can be generated for including with application package,
 
 ```bash
-npx react-native bundle --entry-file .\built\rnView.js --platform android --bundle-output index.android.bundle
+npx react-native bundle --entry-file .\built\rnView.js --platform android --bundle-output .\android\app\src\main\assets\index.android.bundle
+```
+If Hermes engine is used,
+
+```bash
+move .\android\app\src\main\assets\index.android.bundle .\android\app\src\main\assets\index.android.bundle.js
+.\node_modules\hermes-engine\win64-bin\hermes.exe -Wno-undefined-variable -O -emit-binary -non-strict -target=HBC -out .\android\app\src\main\assets\index.android.bundle .\android\app\src\main\assets\index.android.bundle.js -fstrip-function-names
 ```
 
 To webpack the web bundle and output the result in `./dist`, you can run:
@@ -45,7 +51,9 @@ To webpack the web bundle and output the result in `./dist`, you can run:
 npm run build
 ```
 
-NOTE: The react native runtime must have _nativePerformanceNow_ in _global_ for Fluid runtime to work correctly. Currently, i've added the following snipped to JSIExecutor.cpp in react-native to have it,
+Notes: 
+
+1. The react native runtime must have _nativePerformanceNow_ in _global_ for Fluid runtime to work correctly. I've added the following snippet to JSIExecutor.cpp in react-native to have it,
 
 ```cpp
   runtime_->global().setProperty(
@@ -65,3 +73,5 @@ NOTE: The react native runtime must have _nativePerformanceNow_ in _global_ for 
       )
   );
 ```
+
+2. Fluid core requires [_Web Crypo APIs_](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) available in the Javascript runtime. We've currently used [_react-native-crypto_](https://www.npmjs.com/package/react-native-crypto) package. Another alternative is [_isomorphic-webcrypto_](https://github.com/kevlened/isomorphic-webcrypto).
