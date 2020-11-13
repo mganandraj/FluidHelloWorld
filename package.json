@@ -16,8 +16,9 @@
     "@fluidframework/aqueduct": "^0.26.0",
     "@fluidframework/get-tinylicious-container": "^0.26.0",
     "@fluidframework/map": "^0.26.0",
+    "@types/react": "^16.9.56",
+    "@types/react-native": "^0.63.34",
     "buffer": "^6.0.2",
-    "isomorphic-webcrypto": "^2.3.6",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
     "react": "16.11.0",
@@ -25,7 +26,6 @@
     "react-native-crypto": "^2.2.0",
     "react-native-randombytes": "^3.6.0",
     "react-native-url-polyfill": "^1.1.2",
-    "sha.js": "^2.4.11",
     "stream-browserify": "^3.0.0",
     "text-encoding": "^0.7.0"
   },

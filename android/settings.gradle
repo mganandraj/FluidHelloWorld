@@ -6,4 +6,4 @@ include 'react-native'
 project(':react-native').projectDir = new File('E:\\github\\rn-62-fluid\\ReactAndroid')
 
 include 'react-native-randombytes'
-project(':react-native-randombytes').projectDir = new File('E:\\github\\FluidHelloWorld_metro\\node_modules\\react-native-randombytes\\android')
+project(':react-native-randombytes').projectDir = new File('../node_modules/react-native-randombytes/android')

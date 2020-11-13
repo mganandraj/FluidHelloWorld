@@ -30,20 +30,34 @@ npx tsc
 Then, start the RN dev server,
 
 ```bash
-npm run start
+npm run start (or npx react-native start)
 ```
 
-Alternatively, the Javascript bundle can be generated for including with application package,
+Ensure that dev server port is mapped,
+
+```bash
+adb reverse tcp:8081 tcp:8081
+```
+
+Alternatively, the Javascript bundle can be generated and packaged as an application asset,
 
 ```bash
 npx react-native bundle --entry-file .\built\rnView.js --platform android --bundle-output .\android\app\src\main\assets\index.android.bundle
 ```
-If Hermes engine is used,
+Generate bytecodes if Hermes engine is used,
 
 ```bash
 move .\android\app\src\main\assets\index.android.bundle .\android\app\src\main\assets\index.android.bundle.js
 .\node_modules\hermes-engine\win64-bin\hermes.exe -Wno-undefined-variable -O -emit-binary -non-strict -target=HBC -out .\android\app\src\main\assets\index.android.bundle .\android\app\src\main\assets\index.android.bundle.js -fstrip-function-names
 ```
+
+If using tinylicious server, ensure the server is running on host machine and the server port is reverse mapped,
+```bash
+npm run start:server (or run 'tinylicious')
+adb reverse tcp:3000 tcp:3000
+```
+
+
 
 To webpack the web bundle and output the result in `./dist`, you can run:
 
