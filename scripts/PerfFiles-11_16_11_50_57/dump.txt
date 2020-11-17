@@ -1,0 +1,1471 @@
+React Native Views with instance reuse.
+
+USER           PID  PPID     VSZ    RSS WCHAN            ADDR S NAME                       
+root             1     0   98868   3484 0                   0 S init
+root             2     0       0      0 0                   0 S [kthreadd]
+root             3     2       0      0 0                   0 I [rcu_gp]
+root             6     2       0      0 0                   0 S [kworker/u16:0]
+root             7     2       0      0 0                   0 I [mm_percpu_wq]
+root             8     2       0      0 0                   0 S [ksoftirqd/0]
+root             9     2       0      0 0                   0 I [rcu_preempt]
+root            10     2       0      0 0                   0 I [rcu_sched]
+root            11     2       0      0 0                   0 I [rcu_bh]
+root            12     2       0      0 0                   0 S [rcuop/0]
+root            13     2       0      0 0                   0 S [rcuos/0]
+root            14     2       0      0 0                   0 S [rcuob/0]
+root            15     2       0      0 0                   0 S [migration/0]
+root            16     2       0      0 0                   0 S [cpuhp/0]
+root            17     2       0      0 0                   0 S [cpuhp/1]
+root            18     2       0      0 0                   0 S [migration/1]
+root            19     2       0      0 0                   0 S [ksoftirqd/1]
+root            22     2       0      0 0                   0 S [rcuop/1]
+root            23     2       0      0 0                   0 S [rcuos/1]
+root            24     2       0      0 0                   0 S [rcuob/1]
+root            25     2       0      0 0                   0 S [cpuhp/2]
+root            26     2       0      0 0                   0 S [migration/2]
+root            27     2       0      0 0                   0 S [ksoftirqd/2]
+root            30     2       0      0 0                   0 S [rcuop/2]
+root            31     2       0      0 0                   0 S [rcuos/2]
+root            32     2       0      0 0                   0 S [rcuob/2]
+root            33     2       0      0 0                   0 S [cpuhp/3]
+root            34     2       0      0 0                   0 S [migration/3]
+root            35     2       0      0 0                   0 S [ksoftirqd/3]
+root            38     2       0      0 0                   0 S [rcuop/3]
+root            39     2       0      0 0                   0 S [rcuos/3]
+root            40     2       0      0 0                   0 S [rcuob/3]
+root            41     2       0      0 0                   0 S [cpuhp/4]
+root            42     2       0      0 0                   0 S [migration/4]
+root            43     2       0      0 0                   0 S [ksoftirqd/4]
+root            46     2       0      0 0                   0 S [rcuop/4]
+root            47     2       0      0 0                   0 S [rcuos/4]
+root            48     2       0      0 0                   0 S [rcuob/4]
+root            49     2       0      0 0                   0 S [cpuhp/5]
+root            50     2       0      0 0                   0 S [migration/5]
+root            51     2       0      0 0                   0 S [ksoftirqd/5]
+root            54     2       0      0 0                   0 S [rcuop/5]
+root            55     2       0      0 0                   0 S [rcuos/5]
+root            56     2       0      0 0                   0 S [rcuob/5]
+root            57     2       0      0 0                   0 S [cpuhp/6]
+root            58     2       0      0 0                   0 S [migration/6]
+root            59     2       0      0 0                   0 S [ksoftirqd/6]
+root            62     2       0      0 0                   0 S [rcuop/6]
+root            63     2       0      0 0                   0 S [rcuos/6]
+root            64     2       0      0 0                   0 S [rcuob/6]
+root            65     2       0      0 0                   0 S [cpuhp/7]
+root            66     2       0      0 0                   0 S [migration/7]
+root            67     2       0      0 0                   0 S [ksoftirqd/7]
+root            70     2       0      0 0                   0 S [rcuop/7]
+root            71     2       0      0 0                   0 S [rcuos/7]
+root            72     2       0      0 0                   0 S [rcuob/7]
+root            73     2       0      0 0                   0 I [netns]
+root            77     2       0      0 0                   0 I [ipa_usb_wq]
+root            79     2       0      0 0                   0 S [msm_watchdog]
+root            80     2       0      0 0                   0 S [spi_wdsp]
+root            81     2       0      0 0                   0 S [qmp_aop]
+root            82     2       0      0 0                   0 S [qmp_npu_qmp_low]
+root            83     2       0      0 0                   0 S [qmp_npu_qmp_hig]
+root            84     2       0      0 0                   0 S [oom_reaper]
+root            85     2       0      0 0                   0 I [writeback]
+root            86     2       0      0 0                   0 S [kcompactd0]
+root            87     2       0      0 0                   0 I [crypto]
+root            88     2       0      0 0                   0 I [kblockd]
+root            90     2       0      0 0                   0 S [irq/384-arm-smm]
+root            91     2       0      0 0                   0 S [irq/488-arm-smm]
+root            93     2       0      0 0                   0 S [irq/266-dp-pmic]
+root            94     2       0      0 0                   0 S [irq/93-tsens-up]
+root            95     2       0      0 0                   0 S [irq/94-tsens-cr]
+root            96     2       0      0 0                   0 S [irq/95-tsens-up]
+root            97     2       0      0 0                   0 S [irq/96-tsens-cr]
+root            98     2       0      0 0                   0 I [edac-poller]
+root            99     2       0      0 0                   0 S [system]
+root           100     2       0      0 0                   0 S [qsecom_ta]
+root           101     2       0      0 0                   0 S [rbin]
+root           102     2       0      0 0                   0 S [rbin_shrink]
+root           103     2       0      0 0                   0 I [ipa_power_mgmt]
+root           104     2       0      0 0                   0 I [transport_power]
+root           105     2       0      0 0                   0 I [ipa_pm_activate]
+root           106     2       0      0 0                   0 I [devfreq_wq]
+root           107     2       0      0 0                   0 I [cfg80211]
+root           108     2       0      0 0                   0 I [pcie_l1ss_ctrl_]
+root           109     2       0      0 0                   0 I [pcie_linkdown_w]
+root           133     2       0      0 0                   0 S [kauditd]
+root           134     2       0      0 0                   0 S [kswapd0]
+root           135     2       0      0 0                   0 S [ecryptfs-kthrea]
+root           138     2       0      0 0                   0 I [bioset]
+root           176     2       0      0 0                   0 S [irq/388-arm-smm]
+root           177     2       0      0 0                   0 S [irq/389-arm-smm]
+root           178     2       0      0 0                   0 S [irq/390-arm-smm]
+root           179     2       0      0 0                   0 S [irq/379-smp2p]
+root           180     2       0      0 0                   0 S [irq/380-smp2p]
+root           181     2       0      0 0                   0 S [irq/381-smp2p]
+root           182     2       0      0 0                   0 S [irq/382-smp2p]
+root           183     2       0      0 0                   0 I [mem_share_svc]
+root           184     2       0      0 0                   0 S [cdsprm-wq]
+root           185     2       0      0 0                   0 I [cdsprm-wq-delay]
+root           186     2       0      0 0                   0 I [dbg_part_wq]
+root           187     2       0      0 0                   0 S [irq/391-arm-smm]
+root           188     2       0      0 0                   0 S [irq/392-arm-smm]
+root           189     2       0      0 0                   0 I [okl4vtty]
+root           190     2       0      0 0                   0 S [hwrng]
+root           192     2       0      0 0                   0 I [diag_real_time_]
+root           193     2       0      0 0                   0 I [diag_wq]
+root           196     2       0      0 0                   0 I [DIAG_USB_diag]
+root           197     2       0      0 0                   0 I [diag_cntl_wq]
+root           198     2       0      0 0                   0 I [diag_dci_wq]
+root           199     2       0      0 0                   0 I [MODEM_CNTL]
+root           200     2       0      0 0                   0 I [MODEM_DATA]
+root           201     2       0      0 0                   0 I [MODEM_CMD]
+root           202     2       0      0 0                   0 I [MODEM_DCI]
+root           203     2       0      0 0                   0 I [MODEM_DCI_CMD]
+root           204     2       0      0 0                   0 I [LPASS_CNTL]
+root           205     2       0      0 0                   0 I [LPASS_DATA]
+root           206     2       0      0 0                   0 I [LPASS_CMD]
+root           207     2       0      0 0                   0 I [LPASS_DCI]
+root           208     2       0      0 0                   0 I [LPASS_DCI_CMD]
+root           209     2       0      0 0                   0 I [WCNSS_CNTL]
+root           210     2       0      0 0                   0 I [WCNSS_DATA]
+root           211     2       0      0 0                   0 I [WCNSS_CMD]
+root           212     2       0      0 0                   0 I [WCNSS_DCI]
+root           213     2       0      0 0                   0 I [WCNSS_DCI_CMD]
+root           214     2       0      0 0                   0 I [SENSORS_CNTL]
+root           215     2       0      0 0                   0 I [SENSORS_DATA]
+root           216     2       0      0 0                   0 I [SENSORS_CMD]
+root           217     2       0      0 0                   0 I [SENSORS_DCI]
+root           218     2       0      0 0                   0 I [SENSORS_DCI_CMD]
+root           219     2       0      0 0                   0 I [DIAG_CTRL]
+root           220     2       0      0 0                   0 I [DIAG_DATA]
+root           221     2       0      0 0                   0 I [DIAG_CMD]
+root           222     2       0      0 0                   0 I [DIAG_DCI_DATA]
+root           223     2       0      0 0                   0 I [DIAG_DCI_CMD]
+root           224     2       0      0 0                   0 I [CDSP_CNTL]
+root           225     2       0      0 0                   0 I [CDSP_DATA]
+root           226     2       0      0 0                   0 I [CDSP_CMD]
+root           227     2       0      0 0                   0 I [CDSP_DCI]
+root           228     2       0      0 0                   0 I [CDSP_DCI_CMD]
+root           229     2       0      0 0                   0 I [DIAG_RPMSG_DIAG]
+root           230     2       0      0 0                   0 I [DIAG_RPMSG_DIAG]
+root           232     2       0      0 0                   0 I [DIAG_RPMSG_DIAG]
+root           233     2       0      0 0                   0 I [DIAG_RPMSG_DIAG]
+root           234     2       0      0 0                   0 I [DIAG_RPMSG_DIAG]
+root           236     2       0      0 0                   0 I [diag_mhi_MDM]
+root           241     2       0      0 0                   0 I [DIAG_USB_diag_m]
+root           242     2       0      0 0                   0 I [diag_mhi_MDM_DC]
+root           243     2       0      0 0                   0 I [diag_dci_MDM_DC]
+root           244     2       0      0 0                   0 I [kgsl-workqueue]
+root           245     2       0      0 0                   0 I [kgsl-mementry]
+root           246     2       0      0 0                   0 S [kgsl_worker_thr]
+root           247     2       0      0 0                   0 S [irq/489-arm-smm]
+root           248     2       0      0 0                   0 S [irq/490-arm-smm]
+root           249     2       0      0 0                   0 S [irq/491-arm-smm]
+root           250     2       0      0 0                   0 I [kgsl-events]
+root           251     2       0      0 0                   0 I [kgsl_devfreq_wq]
+root           252     2       0      0 0                   0 S [qseecom-unreg-l]
+root           253     2       0      0 0                   0 S [qseecom-unload-]
+root           254     2       0      0 0                   0 I [memory_wq]
+root           255     2       0      0 0                   0 I [cirrus_pwr_wq]
+root           256     2       0      0 0                   0 S [irq/393-arm-smm]
+root           257     2       0      0 0                   0 S [irq/394-arm-smm]
+root           258     2       0      0 0                   0 S [irq/395-arm-smm]
+root           259     2       0      0 0                   0 I [qcrypto_seq_res]
+root           260     2       0      0 0                   0 S [irq/396-arm-smm]
+root           281     2       0      0 0                   0 S [scsi_eh_0]
+root           282     2       0      0 0                   0 I [scsi_tmf_0]
+root           283     2       0      0 0                   0 I [ufs_pm_qos_0]
+root           284     2       0      0 0                   0 I [ufs_clk_gating_]
+root           285     2       0      0 0                   0 I [ice-set-key]
+root           286     2       0      0 0                   0 I [ufs_clkscaling_]
+root           288     2       0      0 0                   0 S [irq/397-arm-smm]
+root           289     2       0      0 0                   0 S [spi1]
+root           290     2       0      0 0                   0 S [spi0]
+root           291     2       0      0 0                   0 S [spi2]
+root           292     2       0      0 0                   0 I [bond0]
+root           293     2       0      0 0                   0 I [k_sm_usb]
+root           294     2       0      0 0                   0 S [irq/482-pwr_eve]
+root           295     2       0      0 0                   0 S [irq/481-dp_hs_p]
+root           296     2       0      0 0                   0 S [irq/484-dm_hs_p]
+root           297     2       0      0 0                   0 S [irq/483-ss_phy_]
+root           298     2       0      0 0                   0 S [irq/398-arm-smm]
+root           300     2       0      0 0                   0 I [k_ipa_usb]
+root           301     2       0      0 0                   0 I [fw_update]
+root           302     2       0      0 0                   0 S [irq/67-max77705]
+root           308     2       0      0 0                   0 S [irq/232-sec_ts]
+root           309     2       0      0 0                   0 S [irq/399-arm-smm]
+root           310     2       0      0 0                   0 I [npu_wq]
+root           311     2       0      0 0                   0 I [msm_vidc_worker]
+root           312     2       0      0 0                   0 I [pm_workerq_venu]
+root           313     2       0      0 0                   0 S [irq/400-arm-smm]
+root           314     2       0      0 0                   0 S [irq/401-arm-smm]
+root           315     2       0      0 0                   0 S [irq/402-arm-smm]
+root           316     2       0      0 0                   0 S [irq/403-arm-smm]
+root           317     2       0      0 0                   0 I [cam-cpas]
+root           318     2       0      0 0                   0 I [qcom,cam_virtua]
+root           319     2       0      0 0                   0 S [irq/404-arm-smm]
+root           320     2       0      0 0                   0 I [qcom,cam170-cpa]
+root           322     2       0      0 0                   0 S [irq/405-arm-smm]
+root           323     2       0      0 0                   0 I [cam_cci_wq]
+root           324     2       0      0 0                   0 I [cam_cci_wq]
+root           325     2       0      0 0                   0 I [cam_cci_wq]
+root           326     2       0      0 0                   0 I [cam_cci_wq]
+root           327     2       0      0 0                   0 S [irq/406-arm-smm]
+root           328     2       0      0 0                   0 S [irq/407-arm-smm]
+root           329     2       0      0 0                   0 S [irq/408-arm-smm]
+root           330     2       0      0 0                   0 S [irq/409-arm-smm]
+root           331     2       0      0 0                   0 S [irq/198-rtc6213]
+root           332     2       0      0 0                   0 S [irq/498-limits_]
+root           335     2       0      0 0                   0 S [irq/499-limits_]
+root           336     2       0      0 0                   0 S [irq/70-bcl-lvl0]
+root           337     2       0      0 0                   0 S [irq/71-bcl-lvl1]
+root           338     2       0      0 0                   0 S [irq/72-bcl-lvl2]
+root           339     2       0      0 0                   0 I [dm_bufio_cache]
+root           340     2       0      0 0                   0 S [irq/81-KRYO L3-]
+root           341     2       0      0 0                   0 I [mmc_clk_gate/mm]
+root           342     2       0      0 0                   0 S [irq/84-8804000.]
+root           344     2       0      0 0                   0 S [irq/83-mmc0]
+root           345     2       0      0 0                   0 S [irq/244-8804000]
+root           346     2       0      0 0                   0 I [ovr_work]
+root           347     2       0      0 0                   0 I [sec_abc_wq]
+root           348     2       0      0 0                   0 I [bootc_wq]
+root           350     2       0      0 0                   0 I [usb_bam_wq]
+root           351     2       0      0 0                   0 S [irq/264-qbt_ipc]
+root           352     2       0      0 0                   0 I [qbt2000_debug_w]
+root           357     2       0      0 0                   0 S [irq/278-A96T3X6]
+root           359     2       0      0 0                   0 S [irq/254-hrm_sen]
+root           360     2       0      0 0                   0 I [sdump_wq]
+root           361     2       0      0 0                   0 I [ssc_fssr_wq]
+root           362     2       0      0 0                   0 I [slpi_motor_wq]
+root           363     2       0      0 0                   0 I [accel_wq]
+root           364     2       0      0 0                   0 I [prox_wq]
+root           365     2       0      0 0                   0 S [irq/268-jig-irq]
+root           366     2       0      0 0                   0 I [max77705-charge]
+root           367     2       0      0 0                   0 I [mfc_workqueue]
+root           368     2       0      0 0                   0 S [irq/64-wpd-det-]
+root           369     2       0      0 0                   0 I [op_wait]
+root           370     2       0      0 0                   0 I [op_send]
+root           371     2       0      0 0                   0 I [ccic_irq_event]
+root           372     2       0      0 0                   0 I [typec_manager_e]
+root           373     2       0      0 0                   0 I [typec_manager_m]
+root           374     2       0      0 0                   0 I [max77705_pd]
+root           375     2       0      0 0                   0 I [ss_vibrator]
+root           376     2       0      0 0                   0 S [five_tee_msg_th]
+root           377     2       0      0 0                   0 S [irq/410-arm-smm]
+root           378     2       0      0 0                   0 I [uaudio_svc]
+root           379     2       0      0 0                   0 S [irq/284-cs35l41]
+root           380     2       0      0 0                   0 S [irq/284-cs35l41]
+root           381     2       0      0 0                   0 I [apr_driver]
+root           382     2       0      0 0                   0 I [wdsp_glink_wq]
+root           383     2       0      0 0                   0 I [ipv6_addrconf]
+root           384     2       0      0 0                   0 S [irq/58-qcom,tem]
+root           386     2       0      0 0                   0 S [irq/54-qcom,tem]
+root           387     2       0      0 0                   0 S [irq/63-thr-int-]
+root           388     2       0      0 0                   0 S [irq/73-thr-int-]
+root           389     2       0      0 0                   0 S [irq/411-arm-smm]
+root           390     2       0      0 0                   0 S [core_ctl/0]
+root           391     2       0      0 0                   0 S [core_ctl/4]
+root           392     2       0      0 0                   0 S [core_ctl/7]
+root           397     2       0      0 0                   0 I [five_wq]
+root           398     2       0      0 0                   0 I [five_hook_wq]
+root           399     2       0      0 0                   0 I [mst_cluster_fre]
+u0_a272        434   765 5841356 132088 0                   0 S com.ironsrc.aura.tmo
+u0_a165        451   765 7116468 143456 0                   0 S com.tmobile.pr.mytmobile
+root           457     2       0      0 0                   0 S [irq/200-wpc-irq]
+u0_a355        461   765 6117104 138288 0                   0 S air.com.rosettastone.mobile.CoursePlayer
+root           465     2       0      0 0                   0 I [rq_stats]
+root           466     2       0      0 0                   0 S [msm_perf:events]
+root           467     2       0      0 0                   0 S [irq/412-arm-smm]
+root           469     2       0      0 0                   0 S [irq/413-arm-smm]
+root           470     2       0      0 0                   0 S [irq/414-arm-smm]
+root           471     2       0      0 0                   0 S [irq/415-arm-smm]
+root           472     2       0      0 0                   0 S [irq/416-arm-smm]
+root           473     2       0      0 0                   0 S [irq/417-arm-smm]
+root           474     2       0      0 0                   0 S [irq/418-arm-smm]
+root           475     2       0      0 0                   0 S [irq/419-arm-smm]
+root           476     2       0      0 0                   0 S [irq/420-arm-smm]
+root           477     2       0      0 0                   0 S [irq/421-arm-smm]
+root           478     2       0      0 0                   0 S [irq/422-arm-smm]
+root           479     2       0      0 0                   0 S [irq/423-arm-smm]
+root           480     2       0      0 0                   0 S [irq/424-arm-smm]
+root           481     2       0      0 0                   0 S [irq/425-arm-smm]
+root           482     2       0      0 0                   0 S [irq/426-arm-smm]
+root           483     2       0      0 0                   0 I [drm_dp]
+root           484     2       0      0 0                   0 S [irq/190-UB_CON_]
+root           485     2       0      0 0                   0 I [flash_br_workqu]
+root           486     2       0      0 0                   0 I [brightness_wq]
+root           487     2       0      0 0                   0 S [irq/387-arm-smm]
+root           488     2       0      0 0                   0 S [irq/427-arm-smm]
+root           489     2       0      0 0                   0 I [sdm_dp_audio_no]
+root           490     2       0      0 0                   0 D [secdp_event]
+root           491     2       0      0 0                   0 I [secdp_hpd]
+root           492     2       0      0 0                   0 I [hdcp_1x_1]
+root           493     2       0      0 0                   0 S [hdcp_tz_lib]
+root           494     2       0      0 0                   0 S [dp_hdcp2p2]
+root           495     2       0      0 0                   0 S [crtc_commit:136]
+root           496     2       0      0 0                   0 S [crtc_event:136]
+root           497     2       0      0 0                   0 S [crtc_commit:190]
+root           498     2       0      0 0                   0 S [crtc_event:190]
+root           499     2       0      0 0                   0 S [crtc_commit:198]
+root           500     2       0      0 0                   0 S [crtc_event:198]
+root           501     2       0      0 0                   0 S [pp_event]
+root           502     2       0      0 0                   0 S [rot_commitq_0_0]
+root           503     2       0      0 0                   0 S [rot_commitq_0_1]
+root           504     2       0      0 0                   0 S [rot_doneq_0_0]
+root           505     2       0      0 0                   0 S [rot_doneq_0_1]
+root           506     2       0      0 0                   0 S [rot_fenceq_0_0]
+root           507     2       0      0 0                   0 S [rot_fenceq_0_1]
+root           508     2       0      0 0                   0 S [rot_fenceq_0_2]
+root           509     2       0      0 0                   0 S [rot_fenceq_0_3]
+root           510     2       0      0 0                   0 S [rot_fenceq_0_4]
+root           511     2       0      0 0                   0 S [rot_fenceq_0_5]
+root           512     2       0      0 0                   0 S [rot_fenceq_0_6]
+root           513     2       0      0 0                   0 S [rot_fenceq_0_7]
+root           514     2       0      0 0                   0 S [rot_fenceq_0_8]
+root           515     2       0      0 0                   0 S [rot_fenceq_0_9]
+root           516     2       0      0 0                   0 S [rot_fenceq_0_10]
+root           517     2       0      0 0                   0 S [rot_fenceq_0_11]
+root           518     2       0      0 0                   0 S [rot_fenceq_0_12]
+root           519     2       0      0 0                   0 S [rot_fenceq_0_13]
+root           520     2       0      0 0                   0 S [rot_fenceq_0_14]
+root           521     2       0      0 0                   0 S [rot_fenceq_0_15]
+root           522     2       0      0 0                   0 I [sb-1]
+root           523     2       0      0 0                   0 S [ngd_rx_thread1]
+root           524     2       0      0 0                   0 S [ngd_notify_sl1]
+root           525     2       0      0 0                   0 I [usb_notify]
+root           526     2       0      0 0                   0 S [irq/48-flip_cov]
+root           527     2       0      0 0                   0 S [irq/50-certify_]
+root           528     2       0      0 0                   0 S [irq/76-qpnp_fla]
+root           529     2       0      0 0                   0 S [irq/75-qpnp_fla]
+root           530     2       0      0 0                   0 S [irq/74-qpnp_fla]
+root           531     2       0      0 0                   0 I [soc:battery]
+root           533     2       0      0 0                   0 I [kdmflush]
+root           534     2       0      0 0                   0 I [bioset]
+root           535     2       0      0 0                   0 I [kverityd]
+root           536     2       0      0 0                   0 I [bioset]
+root           537     2       0      0 0                   0 I [bioset]
+root           538     2       0      0 0                   0 I [bioset]
+root           540     2       0      0 0                   0 I [ext4-rsv-conver]
+root           554     2       0      0 0                   0 I [kdmflush]
+root           555     2       0      0 0                   0 I [bioset]
+root           556     2       0      0 0                   0 I [kverityd]
+root           557     2       0      0 0                   0 I [bioset]
+root           558     2       0      0 0                   0 I [bioset]
+root           559     2       0      0 0                   0 I [bioset]
+root           560     2       0      0 0                   0 I [ext4-rsv-conver]
+root           561     2       0      0 0                   0 I [kdmflush]
+root           562     2       0      0 0                   0 I [bioset]
+root           563     2       0      0 0                   0 I [kverityd]
+root           564     2       0      0 0                   0 I [bioset]
+root           565     2       0      0 0                   0 I [bioset]
+root           566     2       0      0 0                   0 I [bioset]
+root           567     2       0      0 0                   0 I [ext4-rsv-conver]
+root           569     2       0      0 0                   0 S [irq/428-arm-smm]
+root           571     2       0      0 0                   0 S [dhd_watchdog_th]
+root           572     2       0      0 0                   0 S [dhd_rpm_state_t]
+root           574     1   44880   1664 0                   0 S init
+root           575     1   43148   1292 0                   0 S init
+root           576     1   45712   3280 0                   0 S ueventd
+logd           587     1  169068  18924 0                   0 S logd
+system         588     1   37020   2884 0                   0 S servicemanager
+system         589     1   44352   4080 0                   0 S hwservicemanager
+system         590     1   37644   2136 0                   0 S vndservicemanager
+system         595     1   40768   2620 0                   0 S android.hardware.keymaster@4.0-strongbox-service-qti
+system         596     1 2320240   1884 0                   0 S qseecomd
+system         597     1  131140   3224 0                   0 S vendor.qti.hardware.qseecom@1.0-service
+root           610     1 2345272   2984 0                   0 S vold
+dsms           611     1   40012   2772 0                   0 S vendor.samsung.frameworks.security.dsms@1.0-service
+root           636     2       0      0 0                   0 S [jbd2/sda5-8]
+root           637     2       0      0 0                   0 I [ext4-rsv-conver]
+root           639     2       0      0 0                   0 S [jbd2/sda28-8]
+root           640     2       0      0 0                   0 I [ext4-rsv-conver]
+root           641     2       0      0 0                   0 S [jbd2/sda19-8]
+root           642     2       0      0 0                   0 I [ext4-rsv-conver]
+root           644     2       0      0 0                   0 S [jbd2/sda6-8]
+root           645     2       0      0 0                   0 I [ext4-rsv-conver]
+root           647     2       0      0 0                   0 S [jbd2/sda9-8]
+root           648     2       0      0 0                   0 I [ext4-rsv-conver]
+root           655     2       0      0 0                   0 S [jbd2/sda16-8]
+root           656     2       0      0 0                   0 I [ext4-rsv-conver]
+root           658     2       0      0 0                   0 S [jbd2/sda29-8]
+root           659     2       0      0 0                   0 I [ext4-rsv-conver]
+root           661     2       0      0 0                   0 S [jbd2/sda24-8]
+root           662     2       0      0 0                   0 I [ext4-rsv-conver]
+root           664     2       0      0 0                   0 S [jbd2/sda23-8]
+root           665     2       0      0 0                   0 I [ext4-rsv-conver]
+root           667     2       0      0 0                   0 S [jbd2/sda30-8]
+root           668     2       0      0 0                   0 I [ext4-rsv-conver]
+system         672     1   37508   2672 0                   0 S spdaemon
+system         673     1  113308   1324 0                   0 S sec_nvm
+radio          678     1   55664   1552 0                   0 S ipacm-diag
+root           680     2       0      0 0                   0 S [irq/429-arm-smm]
+system         681     1   81164   2212 0                   0 S sscrpcd
+root           682     2       0      0 0                   0 S [irq/430-arm-smm]
+system         683     1   97480   2816 0                   0 S android.system.suspend@1.0-service
+system         684     1   38228   2496 0                   0 S android.hardware.atrace@1.0-service
+system         685     1 2138768   3636 0                   0 S android.hardware.keymaster@4.0-service
+root           686     2       0      0 0                   0 S [irq/431-arm-smm]
+system         687     1   39700   2260 0                   0 S vendor.samsung.hardware.security.wsm@1.0-service
+root           697     2       0      0 0                   0 I [ipa_interrupt_w]
+root           698     2       0      0 0                   0 I [ipawq36]
+root           699     2       0      0 0                   0 I [iparepwq36]
+root           700     2       0      0 0                   0 I [ipawq33]
+root           701     2       0      0 0                   0 I [iparepwq33]
+root           702     2       0      0 0                   0 I [ipawq32]
+root           703     2       0      0 0                   0 I [iparepwq32]
+root           704     2       0      0 0                   0 I [ipa_ut_dbgfs]
+root           705     2       0      0 0                   0 I [clnt_req]
+root           708     2       0      0 0                   0 S [glink_spss]
+root           710     2       0      0 0                   0 S [jbd2/sda31-8]
+root           711     2       0      0 0                   0 I [ext4-rsv-conver]
+system         712     1   38632   2604 0                   0 S vendor.samsung.hardware.security.proca@2.0-service
+system         713     1   38216   2648 0                   0 S vaultkeeperd
+system         714     1   38336   2588 0                   0 S vendor.samsung.hardware.security.vaultkeeper@1.0-service
+system         715     1   34656   2396 0                   0 S storkd
+u0_a218        722   766 1506416  33224 0                   0 S com.android.chrome:privileged_process4
+root           727     1   81364   1536 0                   0 S apexd
+vendor_audit   735     1   35232   2556 0                   0 S auditd
+system         755     1   59576   1672 0                   0 S cass
+system         756     1  189564   2332 0                   0 S time_daemon
+root           762     2       0      0 0                   0 S [glink_modem]
+root           763     2       0      0 0                   0 S [qrtr_rx]
+root           764     1  619996   3776 0                   0 S netd
+root           765     1 5441312  40140 0                   0 S zygote64
+root           766     1 1750592  10300 0                   0 S zygote
+root           770     2       0      0 0                   0 S [glink_cdsp]
+root           771     2       0      0 0                   0 S [qrtr_rx]
+root           779     2       0      0 0                   0 S [glink_adsp]
+root           780     2       0      0 0                   0 S [qrtr_rx]
+root           788     2       0      0 0                   0 S [glink_slpi]
+root           789     2       0      0 0                   0 S [qrtr_rx]
+u0_a59         800   765 5086036  61336 0                   0 S com.sec.android.provider.badge
+audioserver    805     1   79056      0 0                   0 S android.hardware.audio@2.0-service
+system         806     1   39380   2884 0                   0 S android.hidl.allocator@1.0-service
+bluetooth      807     1  130364   1912 0                   0 S android.hardware.bluetooth@1.0-service
+media          808     1   15884    404 0                   0 S android.hardware.cas@1.1-service
+system         809     1   95920   1980 0                   0 S android.hardware.configstore@1.1-service
+media          810     1   21016    248 0                   0 S android.hardware.drm@1.0-service
+media          811     1   63216   2024 0                   0 S android.hardware.drm@1.2-service.clearkey
+media          812     1   21436    180 0                   0 S android.hardware.drm@1.2-service.widevine
+system         813     1   40020   2828 0                   0 S android.hardware.gatekeeper@1.0-service
+system         814     1  328152   3108 0                   0 S android.hardware.gnss@2.0-service-qti
+system         815     1  209436   5748 0                   0 S android.hardware.graphics.composer@2.3-service
+system         816     1   38800   3020 0                   0 S android.hardware.health@2.0-service.samsung
+system         817     1   38452   2972 0                   0 S android.hardware.memtrack@1.0-service
+system         818     1   83616   2912 0                   0 S android.hardware.neuralnetworks@1.2-service-qti
+system         819     1   38460   2676 0                   0 S android.hardware.power@1.0-service
+system         820     1  846548   2800 0                   0 S android.hardware.sensors@1.0-service
+system         821     1   38480   2476 0                   0 S android.hardware.thermal@1.0-service
+root           822     1   60016   2648 0                   0 S android.hardware.usb@1.1-service.wahoo
+wifi           823     1   64368   3364 0                   0 S android.hardware.wifi@1.0-service
+system         824     1   61296   1860 0                   0 S vendor.qti.hardware.capabilityconfigstore@1.0-service
+system         825     1   61280   2328 0                   0 S vendor.qti.hardware.cvp@1.0-service
+system         826     1   97096   3196 0                   0 S vendor.qti.hardware.display.allocator-service
+root           827     1  100604   3524 0                   0 S vendor.qti.hardware.iop@2.0-service
+root           828     1  115028   2508 0                   0 S vendor.qti.hardware.perf@2.0-service
+system         829     1   38820   2456 0                   0 S vendor.qti.hardware.qdutils_disp@1.0-service-qti
+system         833     1   20444    372 0                   0 S vendor.qti.hardware.scve.objecttracker@1.0-service
+system         834     1   20632    368 0                   0 S vendor.qti.hardware.scve.panorama@1.0-service
+system         835     1   37792   2792 0                   0 S vendor.qti.hardware.tui_comm@1.0-service-qti
+system         836     1   38236   2528 0                   0 S vendor.samsung.hardware.base@1.0-service
+cameraserver   837     1  578928  23244 0                   0 S vendor.samsung.hardware.camera.provider@3.0-service
+system         839     1   38564   2764 0                   0 S vendor.samsung.hardware.light@3.0-service
+system         844     1   42560   2700 0                   0 S vendor.samsung.hardware.media.converter@1.0-service
+system         846     1   38212   2808 0                   0 S vendor.samsung.hardware.miscpower@2.0-service
+system         852     1   44628   2664 0                   0 S vendor.samsung.hardware.security.drk@2.0-service
+system         859     1   40796   2564 0                   0 S vendor.samsung.hardware.security.hdcp.keyprovisioning@1.0-service
+system         862     1 2958216   2236 0                   0 S vendor.samsung.hardware.snap@1.1-service
+system         865     1   78212   2308 0                   0 S vendor.samsung.hardware.tlc.arcounter@1.0-service
+system         869     1   38788   2856 0                   0 S vendor.samsung.hardware.vibrator@2.1-service
+wifi           871     1   42376   2596 0                   0 S vendor.samsung.hardware.wifi@2.0-service
+vendor_qrtr    879     1   35068   2364 0                   0 S qrtr-ns
+nobody         881     1   94776   2364 0                   0 S rmt_storage
+vendor_rfs     882     1   39844   2584 0                   0 S tftp_server
+system         890     1   61292   2048 0                   0 S pd-mapper
+system         891     1  149840   1688 0                   0 S pm-service
+nobody         896     1   36800   2852 0                   0 S ashmemd
+audioserver    899     1 2845428   5364 0                   0 S audioserver
+gpu_service    905     1   60852   2836 0                   0 S gpuservice
+lmkd           910     1   35820   3900 0                   0 S lmkd
+system         911     1   73892   8796 0                   0 S perfmond
+system         912     1  496104  16056 0                   0 S surfaceflinger
+root           914     2       0      0 0                   0 S [irq/432-arm-smm]
+system         919     1   38228   2516 0                   0 S vendor.samsung.hardware.security.widevine.keyprovisioning@1.0-service
+root           920     2       0      0 0                   0 S [psimon]
+root           931     2       0      0 0                   0 I [adsp]
+root           946     2       0      0 0                   0 S [irq/433-arm-smm]
+root           958     2       0      0 0                   0 S [irq/274-wcd9xxx]
+root           960     2       0      0 0                   0 I [mtp_read_send]
+root           961     2       0      0 0                   0 I [at_usb0]
+root           962     2       0      0 0                   0 I [at_usb1]
+root           963     2       0      0 0                   0 I [at_usb2]
+root           965     2       0      0 0                   0 I [rmnet_ctrl]
+root           966     2       0      0 0                   0 I [dpl_ctrl]
+root           967     2       0      0 0                   0 I [qdss]
+root           968     2       0      0 0                   0 I [qdss_mdm]
+system         975     1   78720   2552 0                   0 S factory.ssc
+radio          987     1  113872   1712 0                   0 S ipacm
+system         991     1   94220   2260 0                   0 S pm-proxy
+system        1001     1   41820   2848 0                   0 S secure_storage_daemon
+system        1005     1   36096   1740 0                   0 S bsd
+root          1007     1  739608   2440 0                   0 S thermal-engine
+media         1010     1   75020   2444 0                   0 S adsprpcd
+media         1016     1   75020   2392 0                   0 S adsprpcd
+system        1020     1   58848   2560 0                   0 S sdp_cryptod
+cameraserver  1022     1   73344   2996 0                   0 S cameraserver
+drm           1023     1   31356    256 0                   0 S drmserver
+system        1024     1   83892   3304 0                   0 S idmap2d
+system        1025     1   58728   2576 0                   0 S imsd
+incidentd     1026     1   77428   2968 0                   0 S incidentd
+root          1030     2       0      0 0                   0 I [kworker/2:2H]
+system        1042     1   95756   2948 0                   0 S smdexe
+system        1043     1  114456   2592 0                   0 S ddexe
+system        1044     1   79600   3132 0                   0 S connfwexe
+root          1045     1  335444   3764 0                   0 S installd
+keystore      1056     1 2171416   5240 0                   0 S keystore
+media         1057     1   21476    256 0                   0 S mediadrmserver
+mediaex       1058     1 270910012 7804 0                   0 S media.extractor
+media         1059     1 2201272   2284 0                   0 S media.metrics
+media         1060     1  137420   3004 0                   0 S mediaserver
+system        1061     1  101340   3124 0                   0 S perfservice
+statsd        1062     1  179244   8944 0                   0 S statsd
+root          1064     1  104684   6652 0                   0 S storaged
+wifi          1075     1   39752   3488 0                   0 S wificond
+mediacodec    1076     1  286232   1400 0                   0 S media.codec
+radio         1077     1 1526724   1724 0                   0 S rild
+system        1118     1   75020   2348 0                   0 S cdsprpcd
+mediacodec    1126     1 271177264 8384 0                   0 S media.swcodec
+gps           1132     1   75844   2176 0                   0 S loc_launcher
+root          1135     2       0      0 0                   0 I [kworker/6:1H]
+system        1137     1   87400   2320 0                   0 S ATFWD-daemon
+root          1141     2       0      0 0                   0 S [irq/492-arm-smm]
+system        1142     1  113560   5112 0                   0 S faced
+system        1147     1 2139600   3212 0                   0 S gatekeeperd
+tombstoned    1151     1   35336   2200 0                   0 S tombstoned
+system        1157     1  130808   5968 0                   0 S vendor.samsung.hardware.biometrics.fingerprint@3.0-service
+gps           1164  1132 2211672   2196 0                   0 S lowi-server
+gps           1165  1132  172444   1936 0                   0 S xtra-daemon
+radio         1239     1   76292   2536 0                   0 S adpl
+system        1251   765 12477056 92880 0                   0 S system_server
+u10_a59       1281   765 5103460  59036 0                   0 S com.sec.android.provider.badge
+root          1320     2       0      0 0                   0 I [kworker/5:2H]
+shell         1432     1  162792   4016 0                   0 S adbd
+system        1464     1   18104    996 0                   0 S ss_conn_daemon2
+root          1621     2       0      0 0                   0 I [ipawq34]
+root          1622     2       0      0 0                   0 I [iparepwq34]
+root          1623     2       0      0 0                   0 I [ipawq35]
+root          1624     2       0      0 0                   0 I [iparepwq35]
+u0_a251       1635   766 1344004  53868 0                   0 S com.google.android.webview:webview_service
+root          1639     2       0      0 0                   0 I [dfc_wq]
+root          1640     2       0      0 0                   0 I [wda_wq]
+root          1641     2       0      0 0                   0 I [rmnet_powersave]
+radio         1670     1   77680   2540 0                   0 S multiclientd
+system        1671     1   80360   3476 0                   0 S ssud
+root          1678     2       0      0 0                   0 S [irq/44-esd_reco]
+u0_i9418      1715  2181 1340688  44536 0                   0 S com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+root          1803   764   34752   2728 0                   0 S iptables-restore
+radio         1998   765 5981800  56260 0                   0 S com.android.phone
+bluetooth     2007   765 6312948  37960 0                   0 S com.android.bluetooth
+root          2009     2       0      0 0                   0 I [kworker/5:0]
+root          2027     2       0      0 0                   0 I [kworker/3:1]
+u0_a55        2042   765 7523744 209348 0                   0 S com.android.systemui
+wifi          2083     1 2146304   4156 0                   0 S wpa_supplicant
+root          2088     2       0      0 0                   0 I [kworker/4:1]
+root          2135   765 5353884  27304 0                   0 S usap64
+root          2172     2       0      0 0                   0 S [dhd_logtrace_th]
+webview_zygote 2181  766 1758612  10340 0                   0 S webview_zygote
+vendor_intelligenceservice 2217 765 5743652 67176 0         0 S com.samsung.android.rubin.app
+system        2225   765 6633824  48404 0                   0 S com.sec.imsservice
+oem_5013      2246   765 5328216  23792 0                   0 S com.sec.location.nsflp2
+u0_a156       2311   765 6465136 125280 0                   0 S com.sec.android.app.launcher
+system        2391   765 5273472  32764 0                   0 S com.sec.sve
+nfc           2398   765 5267040  38288 0                   0 S com.android.nfc
+secure_element 2417  765 5121196  30372 0                   0 S com.android.se
+system        2454   765 5678944  29092 0                   0 S com.sec.epdg
+root          2572     2       0      0 0                   0 I [dhd_eventd]
+nfc           2577     1   44052   2956 0                   0 S nxp.android.hardware.nfc@1.1-service
+root          2597     2       0      0 0                   0 I [kworker/1:0]
+u0_a84        2664   765 5412736  70672 0                   0 S com.google.android.ext.services
+vendor_knoxcore 2751 765 5139508  40356 0                   0 S com.samsung.android.knox.containercore
+root          2760     2       0      0 0                   0 I [kworker/2:2]
+u0_a338       2807   765 6795000  60796 0                   0 S com.samsung.android.gearpplugin
+shell         2883  1432   37140   3100 0                   0 R ps
+u0_a338       2974   765 5288300  32164 0                   0 S com.samsung.accessory
+system        3503   765 5753188  33380 0                   0 S com.sec.imsservice:CloudMessageService
+u0_a62        3541   765 5470048  28888 0                   0 S android.process.acore
+system        3616     1   35128   1888 0                   0 S iod
+system        3618     1   30620    492 0                   0 S ssgtzd
+system        3620     1   35672   2692 0                   0 S argosd
+system        3623     1   46988   4760 0                   0 S pageboostd
+system        3625     1  126424  82192 0                   0 S vramdiskd
+system        3629     1   76260   2708 0                   0 S perfsdkserver
+system        3642     1   35348   2644 0                   0 S freecessmonitor
+system        3647     1  333848   1780 0                   0 S eris
+system        3675  3642   58516   2704 0                   0 S freecess_binder
+system        3676  3642   58516   2824 0                   0 S freecess_signal
+system        3677  3642   93384   3096 0                   0 S freecess_pkg
+system        3678  3642  110816   2856 0                   0 S freecess_cfb
+root          3762     2       0      0 0                   0 S [irq/32-90b6400.]
+root          3764     2       0      0 0                   0 S [irq/33-90cd000.]
+u0_a116       4185   765 5613604  45016 0                   0 S com.sec.spp.push
+u10_a84       4460   765 5226132  39340 0                   0 S com.google.android.ext.services
+root          4665     2       0      0 0                   0 I [intr_syncd]
+system        4880   765 5351644  82792 0                   0 S com.samsung.android.biometrics.app.setting
+u0_a349       4923   765 5313096  36796 0                   0 S com.google.android.as
+system        5189   765 5326616  32712 0                   0 S com.sec.android.diagmonagent
+system        5238   765 5908704  28992 0                   0 S com.sec.android.sdhms
+root          5323     2       0      0 0                   0 I [kworker/7:0]
+system        5332   765 5223300  32852 0                   0 S com.qualcomm.qti.services.secureui:sui_service
+system        5539   765 5333852  38992 0                   0 S com.samsung.android.mcfserver
+shell         5784  1432   95620   3508 unix_stream_read_generic 0 S abb
+u0_a173       5876   765 6874388  48548 0                   0 S com.samsung.android.app.spage
+u0_a254       5932   765 7011380  53004 0                   0 S com.samsung.android.honeyboard
+u0_i9240      6024  2181 1881856  23912 0                   0 S com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+u0_a69        6502   765 5665804  53328 0                   0 S android.process.media
+u0_a308       7161   765 6245400  62156 0                   0 S com.whatsapp
+u10_a349      7629   765 5269704  25028 0                   0 S com.google.android.as
+vendor_cmhservice 7753 765 6198792 39832 0                  0 S com.samsung.cmh:CMH
+root          8145     2       0      0 0                   0 S [irq/434-arm-smm]
+root          8146     2       0      0 0                   0 S [irq/435-arm-smm]
+u10_a62       8435   765 5973600  49736 0                   0 S android.process.acore
+u10_radio     9424   765 5208328  45396 0                   0 S com.android.phone
+u0_a223       9439   765 5121676  44576 0                   0 S com.qualcomm.embms:remote
+system        9467   765 5198228  50228 0                   0 S android:drmService
+system        9525   765 5362892  50652 0                   0 S com.samsung.android.fmm
+u0_a116       9639   765 5390996  54180 0                   0 S com.sec.spp.push:remoteRuna
+u0_a230       9800   765 10172604 42452 0                   0 S com.google.android.youtube
+u0_a208      10761   765 5287908  59764 0                   0 S com.sec.unifiedwfc
+u0_a65       10809   765 6540240  84336 0                   0 S com.samsung.android.app.cocktailbarservice
+u0_a181      10959   765 5326780  48224 0                   0 S com.google.android.tts
+u0_i9320     12786  2181 1403732  25384 0                   0 S com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+root         12833   766 1745164   1996 0                   0 S usap32
+system       14131   765 5465536  19816 0                   0 S com.samsung.android.server.wifi.mobilewips.client
+u0_a238      14319   765 5173968  45004 0                   0 S com.qualcomm.telephony
+root         14779     2       0      0 0                   0 I [kworker/u16:5]
+u0_a121      15637   765 5651680  52280 0                   0 S com.sec.android.app.camera
+u0_a126      15705   765 5850644  47876 0                   0 S com.sec.android.gallery3d
+root         16068     2       0      0 0                   0 I [kworker/u16:1]
+root         16180     2       0      0 0                   0 I [kworker/u16:17]
+u0_a218      17439   766 1637976  57712 0                   0 S com.android.chrome
+root         17532     2       0      0 0                   0 I [kworker/5:1]
+root         17599     2       0      0 0                   0 I [kworker/3:2]
+root         17607     2       0      0 0                   0 I [kworker/u16:2]
+vendor_bcmgr 17749   765 5431864  30816 0                   0 S com.samsung.android.beaconmanager
+u10_a223     17998   765 5104224  45248 0                   0 S com.qualcomm.embms:remote
+u10_a238     18110   765 5173952  43824 0                   0 S com.qualcomm.telephony
+root         18698     2       0      0 0                   0 I [kworker/u17:0]
+root         18715     2       0      0 0                   0 I [kworker/4:0]
+root         19145     2       0      0 0                   0 I [kworker/7:0H]
+u0_a92       19235   765 7036336  70008 0                   0 S com.google.android.gms
+u0_a92       19248   765 6340796  78672 0                   0 S com.google.android.gms.persistent
+root         19599   766 1743884   1428 0                   0 S usap32
+u0_a223      19620   765 5086040  43776 0                   0 S com.qualcomm.embms
+u10_a92      19627   765 6088840  90444 0                   0 S com.google.android.gms.persistent
+u0_a298      20147   765 6870480 115028 0                   0 S com.twitter.android
+system       20380   765 5244356  51944 0                   0 S com.samsung.android.MtpApplication
+root         20705     2       0      0 0                   0 I [kworker/2:1H]
+u0_a78       20719   765 5459232  27200 0                   0 S com.facebook.services
+system       20834   765 5244400  68508 0                   0 S com.samsung.android.bio.face.service
+shell        20835  1432   35272   2912 __skb_wait_for_more_packets 0 S logcat
+system       21138   766 1873680  36924 0                   0 S com.sec.android.app.dexonpc
+u0_i9380     21149  2181 1503172  29400 0                   0 S com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+oem_5018     21316   765 5933188  62236 0                   0 S com.samsung.android.bixby.service
+root         21983     2       0      0 0                   0 I [kworker/1:2H]
+root         22361     2       0      0 0                   0 I [kworker/3:0H]
+root         22653     2       0      0 0                   0 I [kworker/1:2]
+system       23395   765 5170192  48936 0                   0 S com.samsung.android.svcagent
+u0_a324      23515   765 7689584  34304 0                   0 S com.sophos.smsec
+root         23552     2       0      0 0                   0 I [kworker/u16:4]
+u10_a324     23573   765 6912112  77152 0                   0 S com.sophos.smsec
+u0_a73       23708   765 5356916  63116 0                   0 S com.samsung.android.dynamiclock
+root         23716     2       0      0 0                   0 I [kworker/4:1H]
+root         23822     2       0      0 0                   0 I [kworker/6:1]
+radio        23830   765 5295888  68216 0                   0 S com.samsung.android.app.telephonyui
+u0_a132      23885   765 6011232  83284 0                   0 S com.samsung.android.messaging
+u10_a69      24524   765 5453068  49696 0                   0 S android.process.media
+u10_a69      24572   765 6036180  33860 0                   0 S com.samsung.cmh:CMH
+root         25516     2       0      0 0                   0 I [kworker/6:0H]
+root         25646     2       0      0 0                   0 I [kworker/7:1]
+u0_a55       25965   765 5249412  90244 0                   0 S com.samsung.android.app.routines
+u0_a55       26174   765 5231984  81512 0                   0 S com.samsung.android.app.routines:RoutineUIProcess
+root         26309     2       0      0 0                   0 I [kworker/0:2]
+u0_a92       26356   765 5179132  75068 0                   0 S com.google.process.gservices
+system       26529   765 5160804  79196 0                   0 S com.samsung.accessibility
+root         27149     2       0      0 0                   0 I [kworker/0:0H]
+root         27152     2       0      0 0                   0 I [kworker/5:0H]
+root         27737   764   34764   3288 0                   0 S ip6tables-restore
+root         27834     2       0      0 0                   0 I [kworker/0:0]
+root         27971     2       0      0 0                   0 I [kworker/4:0H]
+root         28115     2       0      0 0                   0 I [kworker/2:0]
+root         28230     2       0      0 0                   0 I [kworker/2:0H]
+u0_a311      28510   765 6895336 151960 0                   0 S com.microsoft.office.outlook.dawg
+u0_a338      28802   765 5108112  34116 0                   0 S com.samsung.accessory:systemprovider
+u0_a306      28936   766 1469648  45668 0                   0 S com.microsoft.emmx.selfhost
+root         29020     2       0      0 0                   0 I [kworker/6:2H]
+vendor_cmhservice 29116 765 5630604 62012 0                 0 S com.samsung.ipservice
+root         29569     2       0      0 0                   0 I [kworker/7:1H]
+root         29963     2       0      0 0                   0 I [kworker/6:0]
+root         30179     2       0      0 0                   0 I [kworker/5:1H]
+system       30481   765 5207652  49836 0                   0 S com.sec.vsimservice
+root         30516     2       0      0 0                   0 I [kworker/5:2]
+u0_a164      30604   765 8431692 138560 0                   0 S com.google.android.googlequicksearchbox:search
+u10_a92      30696   765 5179116  75364 0                   0 S com.google.process.gservices
+root         30992     2       0      0 0                   0 I [kworker/3:0]
+u0_a317      31025   765 6571476 161880 0                   0 S com.microsoft.skydrive
+root         31069     2       0      0 0                   0 I [kworker/4:2]
+root         31084     2       0      0 0                   0 R [kworker/u17:2]
+root         31091     2       0      0 0                   0 I [kworker/0:2H]
+u0_a164      31155   765 6250448  40828 0                   0 S com.google.android.googlequicksearchbox:interactor
+u0_a57       31378   765 5792312  78732 0                   0 S com.samsung.android.app.appsedge
+u0_a95       31386   765 5161624  61344 0                   0 S com.google.android.permissioncontroller
+system       31507   765 5185200  79804 0                   0 S com.samsung.android.bixby.wakeup
+oem_5018     31582   765 5325744 100732 0                   0 S com.samsung.android.bixby.agent
+u10_a164     31590   765 5916904  52316 0                   0 S com.google.android.googlequicksearchbox:afw
+u0_a143      31670   765 5666060  62680 0                   0 S com.sec.android.app.soundalive
+u0_a79       31719   765 5149328  86448 0                   0 S com.samsung.android.fast
+root         31806     2       0      0 0                   0 I [kworker/3:1H]
+vendor_cmhservice 31880 765 5157560 61916 0                 0 S com.samsung.storyservice
+vendor_cmhservice 31913 765 5158008 80384 0                 0 S com.samsung.mlp
+vendor_cmhservice 31939 765 5696692 95772 0                 0 S com.samsung.faceservice
+root         31982     2       0      0 0                   0 I [kworker/1:0H]
+u0_a55       31985   765 5705348  85372 0                   0 S com.samsung.android.app.aodservice:provider
+root         32020     2       0      0 0                   0 I [dsi_err_workq]
+u0_a154      32057   765 5169032  82944 0                   0 S com.google.android.apps.turbo
+system       32137   765 5173032  81480 0                   0 S com.samsung.android.sm.provider
+root         32165     2       0      0 0                   0 I [kworker/1:1]
+root         32270   765 5353884  27088 0                   0 S usap64
+root         32304     2       0      0 0                   0 I [kworker/2:1]
+u10_a89      32482   765 5141072  61184 0                   0 S com.google.android.partnersetup
+u0_a89       32489   765 5123648  61584 0                   0 S com.google.android.partnersetup
+u0_a322      32523   765 5955848 192144 0                   0 S com.microsoft.teams
+root         32568     2       0      0 0                   0 I [kworker/0:1]
+u10_a164     32624   765 5986424 135032 0                   0 S com.google.android.googlequicksearchbox:interactor
+Starting: Intent { cmp=com.fluidhelloworld/.MultiActivity }
+Applications Memory Usage (in Kilobytes):
+Uptime: 324054609 Realtime: 575633593
+
+** MEMINFO in pid 32270 [com.fluidhelloworld] **
+                   Pss      Pss   Shared  Private   Shared  Private  SwapPss     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap     3462        0     1388     3424        0        0       21     8300     7426      873
+  Dalvik Heap     1129        0      656     1120        0        0       15     3663     1615     2048
+ Dalvik Other      707        0      128      704        0        0        0                           
+        Stack       40        0        4       40        0        0        0                           
+       Ashmem        2        0        4        0        8        0        0                           
+    Other dev        8        0      224        0       60        8        0                           
+     .so mmap     1103      136     1244       32    22564      136        2                           
+    .jar mmap     1340      216        0        0    21948      216        0                           
+    .apk mmap      823      420        0        0     5160      420        0                           
+    .ttf mmap      188      188        0        0        0      188        0                           
+    .dex mmap     2418        0        0        4     4836        0        0                           
+    .oat mmap      450       16       32        0    15016       16        0                           
+    .art mmap      950        0    13700      784      120        0       21                           
+   Other mmap       23        0       20       20      672        0        0                           
+      Unknown      555        0      492      548        0        0        1                           
+        TOTAL    13258      976    17892     6676    70384      984       60    11963     9041     2921
+ 
+ Dalvik Details
+        .Heap      660        0        0      660        0        0        0                           
+         .LOS        0        0       40        0        0        0        8                           
+      .Zygote      317        0      616      308        0        0        7                           
+   .NonMoving      152        0        0      152        0        0        0                           
+ .LinearAlloc      384        0       64      384        0        0        0                           
+          .GC      263        0       56      260        0        0        0                           
+ .IndirectRef       60        0        8       60        0        0        0                           
+     .App dex       62        0        0        4      124        0        0                           
+    .App vdex     2356        0        0        0     4712        0        0                           
+    .Boot art      950        0    13700      784      120        0       21                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     1904
+         Native Heap:     3424
+                Code:     1012
+               Stack:       40
+            Graphics:        0
+       Private Other:     1280
+              System:     5598
+ 
+               TOTAL:    13258       TOTAL SWAP PSS:       60
+ 
+ Objects
+               Views:       25         ViewRootImpl:        1
+         AppContexts:        6           Activities:        1
+              Assets:       14        AssetManagers:        0
+       Local Binders:       10        Proxy Binders:       40
+       Parcel memory:        3         Parcel count:       12
+    Death Recipients:        0      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
+Broadcasting: Intent { act=com.fluidhelloworld.NEW_DICE flg=0x400000 (has extras) }
+Broadcast completed: result=0
+Applications Memory Usage (in Kilobytes):
+Uptime: 324067125 Realtime: 575646110
+
+** MEMINFO in pid 32270 [com.fluidhelloworld] **
+                   Pss      Pss   Shared  Private   Shared  Private  SwapPss     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    14031        0     1284    14008        0        0       18    24264    21438     2825
+  Dalvik Heap     3430        0     1288     3140        0        0        7     5047     2999     2048
+ Dalvik Other     1564        0       92     1564        0        0        0                           
+        Stack       40        0        4       40        0        0        0                           
+       Ashmem        2        0        4        0        8        0        0                           
+      Gfx dev      336        0        0      336        0        0        0                           
+    Other dev       12        0      240        0      120       12        0                           
+     .so mmap     7994     5364     1488      296    31716     5364        2                           
+    .jar mmap     1841      368        0        0    25188      368        0                           
+    .apk mmap     6220      612        0      196    20024      612        0                           
+    .ttf mmap      231      188        0        0      164      188        0                           
+    .dex mmap     4886      124        0       24    10740      124        0                           
+    .oat mmap      515       24       32        0    16260       24        0                           
+    .art mmap     1414        0    14020     1032      220        0       14                           
+   Other mmap      388        0      236       64     1608       20        0                           
+    GL mtrack     5860        0        0     5860        0        0        0                           
+      Unknown    11912        0      476    11892        0        0        1                           
+        TOTAL    60718     6680    19164    38452   106048     6712       42    29311    24437     4873
+ 
+ Dalvik Details
+        .Heap     2536        0        0     2536        0        0        0                           
+         .LOS      116        0       96       92        0        0        7                           
+      .Zygote      690        0     1192      424        0        0        0                           
+   .NonMoving       88        0        0       88        0        0        0                           
+ .LinearAlloc     1184        0       40     1184        0        0        0                           
+          .GC      280        0       44      280        0        0        0                           
+ .IndirectRef      100        0        8      100        0        0        0                           
+   .Boot vdex        0        0        0        0        8        0        0                           
+     .App dex     1514       40        0       24     3612       40        0                           
+    .App vdex     3372       84        0        0     7120       84        0                           
+    .Boot art     1414        0    14020     1032      220        0       14                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     4172
+         Native Heap:    14008
+                Code:     7196
+               Stack:       40
+            Graphics:     6196
+       Private Other:    13552
+              System:    15554
+ 
+               TOTAL:    60718       TOTAL SWAP PSS:       42
+ 
+ Objects
+               Views:       31         ViewRootImpl:        2
+         AppContexts:        5           Activities:        1
+              Assets:       17        AssetManagers:        0
+       Local Binders:       12        Proxy Binders:       42
+       Parcel memory:        4         Parcel count:       18
+    Death Recipients:        0      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
+Broadcasting: Intent { act=com.fluidhelloworld.NEW_DICE flg=0x400000 (has extras) }
+Broadcast completed: result=0
+Applications Memory Usage (in Kilobytes):
+Uptime: 324079591 Realtime: 575658576
+
+** MEMINFO in pid 32270 [com.fluidhelloworld] **
+                   Pss      Pss   Shared  Private   Shared  Private  SwapPss     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    15947        0     1284    15924        0        0       18    27320    25464     1855
+  Dalvik Heap     4322        0     1288     4032        0        0        7     5365     3317     2048
+ Dalvik Other     1556        0       92     1556        0        0        0                           
+        Stack       40        0        4       40        0        0        0                           
+       Ashmem        2        0        4        0        8        0        0                           
+      Gfx dev      484        0        0      484        0        0        0                           
+    Other dev       12        0      240        0      120       12        0                           
+     .so mmap     7995     5364     1492      296    31716     5364        2                           
+    .jar mmap     1841      368        0        0    25188      368        0                           
+    .apk mmap     6220      612        0      196    20024      612        0                           
+    .ttf mmap      231      188        0        0      164      188        0                           
+    .dex mmap     4886      124        0       24    10740      124        0                           
+    .oat mmap      515       24       32        0    16260       24        0                           
+    .art mmap     1422        0    14012     1040      220        0       14                           
+   Other mmap      420        0      276       76     1608       20        0                           
+    GL mtrack     5844        0        0     5844        0        0        0                           
+      Unknown    15628        0      476    15608        0        0        1                           
+        TOTAL    67407     6680    19200    45120   106048     6712       42    32685    28781     3903
+ 
+ Dalvik Details
+        .Heap     3468        0        0     3468        0        0        0                           
+         .LOS       76        0       96       52        0        0        7                           
+      .Zygote      690        0     1192      424        0        0        0                           
+   .NonMoving       88        0        0       88        0        0        0                           
+ .LinearAlloc     1184        0       40     1184        0        0        0                           
+          .GC      256        0       44      256        0        0        0                           
+ .IndirectRef      116        0        8      116        0        0        0                           
+   .Boot vdex        0        0        0        0        8        0        0                           
+     .App dex     1514       40        0       24     3612       40        0                           
+    .App vdex     3372       84        0        0     7120       84        0                           
+    .Boot art     1422        0    14012     1040      220        0       14                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     5072
+         Native Heap:    15924
+                Code:     7196
+               Stack:       40
+            Graphics:     6328
+       Private Other:    17272
+              System:    15575
+ 
+               TOTAL:    67407       TOTAL SWAP PSS:       42
+ 
+ Objects
+               Views:       35         ViewRootImpl:        2
+         AppContexts:        5           Activities:        1
+              Assets:       17        AssetManagers:        0
+       Local Binders:       14        Proxy Binders:       43
+       Parcel memory:        4         Parcel count:       18
+    Death Recipients:        0      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
+Broadcasting: Intent { act=com.fluidhelloworld.NEW_DICE flg=0x400000 (has extras) }
+Broadcast completed: result=0
+Applications Memory Usage (in Kilobytes):
+Uptime: 324092087 Realtime: 575671071
+
+** MEMINFO in pid 32270 [com.fluidhelloworld] **
+                   Pss      Pss   Shared  Private   Shared  Private  SwapPss     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    18235        0     1284    18212        0        0       18    30864    28175     2688
+  Dalvik Heap     3586        0     1288     3296        0        0        7     5141     3093     2048
+ Dalvik Other     1568        0       92     1568        0        0        0                           
+        Stack       40        0        4       40        0        0        0                           
+       Ashmem        2        0        4        0        8        0        0                           
+      Gfx dev      520        0        0      520        0        0        0                           
+    Other dev       12        0      240        0      120       12        0                           
+     .so mmap     7995     5364     1492      296    31716     5364        2                           
+    .jar mmap     1841      368        0        0    25188      368        0                           
+    .apk mmap     6220      612        0      196    20024      612        0                           
+    .ttf mmap      231      188        0        0      164      188        0                           
+    .dex mmap     4886      124        0       24    10740      124        0                           
+    .oat mmap      514       24       32        0    16260       24        0                           
+    .art mmap     1422        0    14012     1040      220        0       14                           
+   Other mmap      420        0      276       76     1608       20        0                           
+    GL mtrack     5808        0        0     5808        0        0        0                           
+      Unknown    19160        0      476    19140        0        0        1                           
+        TOTAL    72502     6680    19200    50216   106048     6712       42    36005    31268     4736
+ 
+ Dalvik Details
+        .Heap     2752        0        0     2752        0        0        0                           
+         .LOS       56        0       96       32        0        0        7                           
+      .Zygote      690        0     1192      424        0        0        0                           
+   .NonMoving       88        0        0       88        0        0        0                           
+ .LinearAlloc     1184        0       40     1184        0        0        0                           
+          .GC      260        0       44      260        0        0        0                           
+ .IndirectRef      124        0        8      124        0        0        0                           
+   .Boot vdex        0        0        0        0        8        0        0                           
+     .App dex     1514       40        0       24     3612       40        0                           
+    .App vdex     3372       84        0        0     7120       84        0                           
+    .Boot art     1422        0    14012     1040      220        0       14                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     4336
+         Native Heap:    18212
+                Code:     7196
+               Stack:       40
+            Graphics:     6328
+       Private Other:    20816
+              System:    15574
+ 
+               TOTAL:    72502       TOTAL SWAP PSS:       42
+ 
+ Objects
+               Views:       39         ViewRootImpl:        2
+         AppContexts:        5           Activities:        1
+              Assets:       17        AssetManagers:        0
+       Local Binders:       16        Proxy Binders:       44
+       Parcel memory:        4         Parcel count:       18
+    Death Recipients:        0      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
+Broadcasting: Intent { act=com.fluidhelloworld.NEW_DICE flg=0x400000 (has extras) }
+Broadcast completed: result=0
+Applications Memory Usage (in Kilobytes):
+Uptime: 324104550 Realtime: 575683535
+
+** MEMINFO in pid 32270 [com.fluidhelloworld] **
+                   Pss      Pss   Shared  Private   Shared  Private  SwapPss     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    20183        0     1284    20160        0        0       18    34308    31531     2776
+  Dalvik Heap     3354        0     1288     3064        0        0        7     5159     3111     2048
+ Dalvik Other     1592        0       92     1592        0        0        0                           
+        Stack       40        0        4       40        0        0        0                           
+       Ashmem        2        0        4        0        8        0        0                           
+      Gfx dev      556        0        0      556        0        0        0                           
+    Other dev       12        0      240        0      120       12        0                           
+     .so mmap     7995     5364     1492      296    31716     5364        2                           
+    .jar mmap     1900      368        0        0    25604      368        0                           
+    .apk mmap     6220      612        0      196    20024      612        0                           
+    .ttf mmap      231      188        0        0      164      188        0                           
+    .dex mmap     7682     5716        0       24     5148     5716        0                           
+    .oat mmap      514       24       32        0    16260       24        0                           
+    .art mmap     1426        0    14008     1044      220        0       14                           
+   Other mmap      472        0      348       92     1608       20        0                           
+    GL mtrack     5772        0        0     5772        0        0        0                           
+      Unknown    23060        0      476    23040        0        0        1                           
+        TOTAL    81053    12272    19268    55876   100872    12304       42    39467    34642     4824
+ 
+ Dalvik Details
+        .Heap     2520        0        0     2520        0        0        0                           
+         .LOS       56        0       96       32        0        0        7                           
+      .Zygote      690        0     1192      424        0        0        0                           
+   .NonMoving       88        0        0       88        0        0        0                           
+ .LinearAlloc     1196        0       40     1196        0        0        0                           
+          .GC      260        0       44      260        0        0        0                           
+ .IndirectRef      136        0        8      136        0        0        0                           
+   .Boot vdex        0        0        0        0        8        0        0                           
+     .App dex     1580      172        0       24     3480      172        0                           
+    .App vdex     6102     5544        0        0     1660     5544        0                           
+    .Boot art     1426        0    14008     1044      220        0       14                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     4108
+         Native Heap:    20160
+                Code:    12788
+               Stack:       40
+            Graphics:     6328
+       Private Other:    24756
+              System:    12873
+ 
+               TOTAL:    81053       TOTAL SWAP PSS:       42
+ 
+ Objects
+               Views:       43         ViewRootImpl:        2
+         AppContexts:        5           Activities:        1
+              Assets:       17        AssetManagers:        0
+       Local Binders:       15        Proxy Binders:       44
+       Parcel memory:        5         Parcel count:       20
+    Death Recipients:        0      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
+Broadcasting: Intent { act=com.fluidhelloworld.NEW_DICE flg=0x400000 (has extras) }
+Broadcast completed: result=0
+Applications Memory Usage (in Kilobytes):
+Uptime: 324117049 Realtime: 575696034
+
+** MEMINFO in pid 32270 [com.fluidhelloworld] **
+                   Pss      Pss   Shared  Private   Shared  Private  SwapPss     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    22199        0     1284    22176        0        0       18    37360    34447     2912
+  Dalvik Heap     3310        0     1288     3020        0        0        7     5171     3123     2048
+ Dalvik Other     1600        0       92     1600        0        0        0                           
+        Stack       40        0        4       40        0        0        0                           
+       Ashmem        2        0        4        0        8        0        0                           
+      Gfx dev      584        0        0      584        0        0        0                           
+    Other dev       12        0      240        0      120       12        0                           
+     .so mmap     7995     5364     1492      296    31716     5364        2                           
+    .jar mmap     1904      368        0        0    25668      368        0                           
+    .apk mmap     6220      612        0      196    20024      612        0                           
+    .ttf mmap      231      188        0        0      164      188        0                           
+    .dex mmap     7682     5716        0       24     5148     5716        0                           
+    .oat mmap      514       24       32        0    16260       24        0                           
+    .art mmap     1426        0    14008     1044      220        0       14                           
+   Other mmap      500        0      388      100     1608       20        0                           
+    GL mtrack     5600        0        0     5600        0        0        0                           
+      Unknown    19920        0      476    19900        0        0        1                           
+        TOTAL    79781    12272    19308    54580   100936    12304       42    42531    37570     4960
+ 
+ Dalvik Details
+        .Heap     2476        0        0     2476        0        0        0                           
+         .LOS       56        0       96       32        0        0        7                           
+      .Zygote      690        0     1192      424        0        0        0                           
+   .NonMoving       88        0        0       88        0        0        0                           
+ .LinearAlloc     1196        0       40     1196        0        0        0                           
+          .GC      256        0       44      256        0        0        0                           
+ .IndirectRef      148        0        8      148        0        0        0                           
+   .Boot vdex        0        0        0        0        8        0        0                           
+     .App dex     1580      172        0       24     3480      172        0                           
+    .App vdex     6102     5544        0        0     1660     5544        0                           
+    .Boot art     1426        0    14008     1044      220        0       14                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     4064
+         Native Heap:    22176
+                Code:    12788
+               Stack:       40
+            Graphics:     6184
+       Private Other:    21632
+              System:    12897
+ 
+               TOTAL:    79781       TOTAL SWAP PSS:       42
+ 
+ Objects
+               Views:       47         ViewRootImpl:        2
+         AppContexts:        5           Activities:        1
+              Assets:       17        AssetManagers:        0
+       Local Binders:       17        Proxy Binders:       43
+       Parcel memory:        5         Parcel count:       20
+    Death Recipients:        0      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
+Broadcasting: Intent { act=com.fluidhelloworld.NEW_DICE flg=0x400000 (has extras) }
+Broadcast completed: result=0
+Applications Memory Usage (in Kilobytes):
+Uptime: 324129588 Realtime: 575708573
+
+** MEMINFO in pid 32270 [com.fluidhelloworld] **
+                   Pss      Pss   Shared  Private   Shared  Private  SwapPss     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    23359        0     1284    23336        0        0       18    39444    37410     2033
+  Dalvik Heap     4270        0     1288     3980        0        0        7     5458     3410     2048
+ Dalvik Other     1624        0       92     1624        0        0        0                           
+        Stack       40        0        4       40        0        0        0                           
+       Ashmem        2        0        4        0        8        0        0                           
+      Gfx dev      628        0        0      628        0        0        0                           
+    Other dev       12        0      240        0      120       12        0                           
+     .so mmap     7995     5364     1492      296    31716     5364        2                           
+    .jar mmap     1904      368        0        0    25668      368        0                           
+    .apk mmap     6245      612        0      196    20088      612        0                           
+    .ttf mmap      231      188        0        0      164      188        0                           
+    .dex mmap     7682     5716        0       24     5148     5716        0                           
+    .oat mmap      514       24       32        0    16260       24        0                           
+    .art mmap     1426        0    14008     1044      220        0       14                           
+   Other mmap      532        0      428      112     1608       20        0                           
+    GL mtrack     5700        0        0     5700        0        0        0                           
+      Unknown    24160        0      476    24140        0        0        1                           
+        TOTAL    86366    12272    19348    61120   101000    12304       42    44902    40820     4081
+ 
+ Dalvik Details
+        .Heap     3436        0        0     3436        0        0        0                           
+         .LOS       56        0       96       32        0        0        7                           
+      .Zygote      690        0     1192      424        0        0        0                           
+   .NonMoving       88        0        0       88        0        0        0                           
+ .LinearAlloc     1196        0       40     1196        0        0        0                           
+          .GC      260        0       44      260        0        0        0                           
+ .IndirectRef      168        0        8      168        0        0        0                           
+   .Boot vdex        0        0        0        0        8        0        0                           
+     .App dex     1580      172        0       24     3480      172        0                           
+    .App vdex     6102     5544        0        0     1660     5544        0                           
+    .Boot art     1426        0    14008     1044      220        0       14                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     5024
+         Native Heap:    23336
+                Code:    12788
+               Stack:       40
+            Graphics:     6328
+       Private Other:    25908
+              System:    12942
+ 
+               TOTAL:    86366       TOTAL SWAP PSS:       42
+ 
+ Objects
+               Views:       51         ViewRootImpl:        2
+         AppContexts:        5           Activities:        1
+              Assets:       17        AssetManagers:        0
+       Local Binders:       19        Proxy Binders:       44
+       Parcel memory:        5         Parcel count:       20
+    Death Recipients:        0      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
+Broadcasting: Intent { act=com.fluidhelloworld.NEW_DICE flg=0x400000 (has extras) }
+Broadcast completed: result=0
+Applications Memory Usage (in Kilobytes):
+Uptime: 324142109 Realtime: 575721093
+
+** MEMINFO in pid 32270 [com.fluidhelloworld] **
+                   Pss      Pss   Shared  Private   Shared  Private  SwapPss     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    24911        0     1284    24888        0        0       18    41784    39310     2473
+  Dalvik Heap     3654        0     1288     3364        0        0        7     5324     3276     2048
+ Dalvik Other     1640        0       92     1640        0        0        0                           
+        Stack       40        0        4       40        0        0        0                           
+       Ashmem        2        0        4        0        8        0        0                           
+      Gfx dev      664        0        0      664        0        0        0                           
+    Other dev       12        0      240        0      120       12        0                           
+     .so mmap     7995     5364     1492      296    31716     5364        2                           
+    .jar mmap     1904      368        0        0    25668      368        0                           
+    .apk mmap     6245      612        0      196    20088      612        0                           
+    .ttf mmap      231      188        0        0      164      188        0                           
+    .dex mmap     7682     5716        0       24     5148     5716        0                           
+    .oat mmap      514       24       32        0    16260       24        0                           
+    .art mmap     1426        0    14008     1044      220        0       14                           
+   Other mmap      560        0      460      124     1608       20        0                           
+    GL mtrack     5664        0        0     5664        0        0        0                           
+      Unknown    27768        0      476    27748        0        0        1                           
+        TOTAL    90954    12272    19380    65692   101000    12304       42    47108    42586     4521
+ 
+ Dalvik Details
+        .Heap     2820        0        0     2820        0        0        0                           
+         .LOS       56        0       96       32        0        0        7                           
+      .Zygote      690        0     1192      424        0        0        0                           
+   .NonMoving       88        0        0       88        0        0        0                           
+ .LinearAlloc     1196        0       40     1196        0        0        0                           
+          .GC      260        0       44      260        0        0        0                           
+ .IndirectRef      184        0        8      184        0        0        0                           
+   .Boot vdex        0        0        0        0        8        0        0                           
+     .App dex     1580      172        0       24     3480      172        0                           
+    .App vdex     6102     5544        0        0     1660     5544        0                           
+    .Boot art     1426        0    14008     1044      220        0       14                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     4408
+         Native Heap:    24888
+                Code:    12788
+               Stack:       40
+            Graphics:     6328
+       Private Other:    29544
+              System:    12958
+ 
+               TOTAL:    90954       TOTAL SWAP PSS:       42
+ 
+ Objects
+               Views:       55         ViewRootImpl:        2
+         AppContexts:        5           Activities:        1
+              Assets:       17        AssetManagers:        0
+       Local Binders:       21        Proxy Binders:       45
+       Parcel memory:        5         Parcel count:       20
+    Death Recipients:        0      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
+Broadcasting: Intent { act=com.fluidhelloworld.NEW_DICE flg=0x400000 (has extras) }
+Broadcast completed: result=0
+Applications Memory Usage (in Kilobytes):
+Uptime: 324154608 Realtime: 575733593
+
+** MEMINFO in pid 32270 [com.fluidhelloworld] **
+                   Pss      Pss   Shared  Private   Shared  Private  SwapPss     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    19143        0     1284    19120        0        0       18    31540    29450     2089
+  Dalvik Heap     3430        0     1288     3140        0        0        7     5314     3266     2048
+ Dalvik Other     1548        0       92     1548        0        0        0                           
+        Stack       40        0        4       40        0        0        0                           
+       Ashmem        2        0        4        0        8        0        0                           
+      Gfx dev      704        0        0      704        0        0        0                           
+    Other dev       12        0      240        0      120       12        0                           
+     .so mmap     7995     5364     1492      296    31716     5364        2                           
+    .jar mmap     1928      368        0        0    25900      368        0                           
+    .apk mmap     6245      612        0      196    20088      612        0                           
+    .ttf mmap      231      188        0        0      164      188        0                           
+    .dex mmap     7682     5716        0       24     5148     5716        0                           
+    .oat mmap      515       24       32        0    16324       24        0                           
+    .art mmap     1426        0    14008     1044      220        0       14                           
+   Other mmap      588        0      500      132     1608       20        0                           
+    GL mtrack     5624        0        0     5624        0        0        0                           
+      Unknown    18492        0      476    18472        0        0        1                           
+        TOTAL    75647    12272    19420    50340   101296    12304       42    36854    32716     4137
+ 
+ Dalvik Details
+        .Heap     2596        0        0     2596        0        0        0                           
+         .LOS       56        0       96       32        0        0        7                           
+      .Zygote      690        0     1192      424        0        0        0                           
+   .NonMoving       88        0        0       88        0        0        0                           
+ .LinearAlloc     1200        0       40     1200        0        0        0                           
+          .GC      140        0       44      140        0        0        0                           
+ .IndirectRef      208        0        8      208        0        0        0                           
+   .Boot vdex        0        0        0        0        8        0        0                           
+     .App dex     1580      172        0       24     3480      172        0                           
+    .App vdex     6102     5544        0        0     1660     5544        0                           
+    .Boot art     1426        0    14008     1044      220        0       14                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     4184
+         Native Heap:    19120
+                Code:    12788
+               Stack:       40
+            Graphics:     6328
+       Private Other:    20184
+              System:    13003
+ 
+               TOTAL:    75647       TOTAL SWAP PSS:       42
+ 
+ Objects
+               Views:       57         ViewRootImpl:        1
+         AppContexts:        5           Activities:        1
+              Assets:       17        AssetManagers:        0
+       Local Binders:       23        Proxy Binders:       46
+       Parcel memory:        5         Parcel count:       20
+    Death Recipients:        0      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
+Broadcasting: Intent { act=com.fluidhelloworld.NEW_DICE flg=0x400000 (has extras) }
+Broadcast completed: result=0
+Applications Memory Usage (in Kilobytes):
+Uptime: 324167129 Realtime: 575746114
+
+** MEMINFO in pid 32270 [com.fluidhelloworld] **
+                   Pss      Pss   Shared  Private   Shared  Private  SwapPss     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    22051        0     1284    22028        0        0       18    34740    31380     3359
+  Dalvik Heap     3578        0     1288     3288        0        0        7     5370     3322     2048
+ Dalvik Other     1680        0       92     1680        0        0        0                           
+        Stack       40        0        4       40        0        0        0                           
+       Ashmem        2        0        4        0        8        0        0                           
+      Gfx dev      740        0        0      740        0        0        0                           
+    Other dev       12        0      240        0      120       12        0                           
+     .so mmap     7995     5364     1492      296    31716     5364        2                           
+    .jar mmap     1928      368        0        0    25900      368        0                           
+    .apk mmap     6245      612        0      196    20088      612        0                           
+    .ttf mmap      231      188        0        0      164      188        0                           
+    .dex mmap     7682     5716        0       24     5148     5716        0                           
+    .oat mmap      515       24       32        0    16324       24        0                           
+    .art mmap     1426        0    14008     1044      220        0       14                           
+   Other mmap      616        0      540      140     1608       20        0                           
+    GL mtrack     5588        0        0     5588        0        0        0                           
+      Unknown    22116        0      476    22096        0        0        1                           
+        TOTAL    82487    12272    19460    57160   101296    12304       42    40110    34702     5407
+ 
+ Dalvik Details
+        .Heap     2744        0        0     2744        0        0        0                           
+         .LOS       56        0       96       32        0        0        7                           
+      .Zygote      690        0     1192      424        0        0        0                           
+   .NonMoving       88        0        0       88        0        0        0                           
+ .LinearAlloc     1200        0       40     1200        0        0        0                           
+          .GC      260        0       44      260        0        0        0                           
+ .IndirectRef      220        0        8      220        0        0        0                           
+   .Boot vdex        0        0        0        0        8        0        0                           
+     .App dex     1580      172        0       24     3480      172        0                           
+    .App vdex     6102     5544        0        0     1660     5544        0                           
+    .Boot art     1426        0    14008     1044      220        0       14                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     4332
+         Native Heap:    22028
+                Code:    12788
+               Stack:       40
+            Graphics:     6328
+       Private Other:    23948
+              System:    13023
+ 
+               TOTAL:    82487       TOTAL SWAP PSS:       42
+ 
+ Objects
+               Views:       63         ViewRootImpl:        2
+         AppContexts:        5           Activities:        1
+              Assets:       17        AssetManagers:        0
+       Local Binders:       25        Proxy Binders:       47
+       Parcel memory:        5         Parcel count:       20
+    Death Recipients:        0      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
+Broadcasting: Intent { act=com.fluidhelloworld.NEW_DICE flg=0x400000 (has extras) }
+Broadcast completed: result=0
+Applications Memory Usage (in Kilobytes):
+Uptime: 324179652 Realtime: 575758636
+
+** MEMINFO in pid 32270 [com.fluidhelloworld] **
+                   Pss      Pss   Shared  Private   Shared  Private  SwapPss     Heap     Heap     Heap
+                 Total    Clean    Dirty    Dirty    Clean    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    23451        0     1284    23428        0        0       18    36848    34289     2558
+  Dalvik Heap     3726        0     1288     3436        0        0        7     5436     3388     2048
+ Dalvik Other     1688        0       92     1688        0        0        0                           
+        Stack       40        0        4       40        0        0        0                           
+       Ashmem        2        0        4        0        8        0        0                           
+      Gfx dev      776        0        0      776        0        0        0                           
+    Other dev       12        0      240        0      120       12        0                           
+     .so mmap     7995     5364     1492      296    31716     5364        2                           
+    .jar mmap     1928      368        0        0    25900      368        0                           
+    .apk mmap     6245      612        0      196    20088      612        0                           
+    .ttf mmap      231      188        0        0      164      188        0                           
+    .dex mmap     7682     5716        0       24     5148     5716        0                           
+    .oat mmap      515       24       32        0    16324       24        0                           
+    .art mmap     1426        0    14008     1044      220        0       14                           
+   Other mmap      616        0      540      140     1608       20        0                           
+    GL mtrack     5552        0        0     5552        0        0        0                           
+      Unknown    25788        0      476    25768        0        0        1                           
+        TOTAL    87715    12272    19460    62388   101296    12304       42    42284    37677     4606
+ 
+ Dalvik Details
+        .Heap     2872        0        0     2872        0        0        0                           
+         .LOS       76        0       96       52        0        0        7                           
+      .Zygote      690        0     1192      424        0        0        0                           
+   .NonMoving       88        0        0       88        0        0        0                           
+ .LinearAlloc     1200        0       40     1200        0        0        0                           
+          .GC      260        0       44      260        0        0        0                           
+ .IndirectRef      228        0        8      228        0        0        0                           
+   .Boot vdex        0        0        0        0        8        0        0                           
+     .App dex     1580      172        0       24     3480      172        0                           
+    .App vdex     6102     5544        0        0     1660     5544        0                           
+    .Boot art     1426        0    14008     1044      220        0       14                           
+ 
+ App Summary
+                       Pss(KB)
+                        ------
+           Java Heap:     4480
+         Native Heap:    23428
+                Code:    12788
+               Stack:       40
+            Graphics:     6328
+       Private Other:    27628
+              System:    13023
+ 
+               TOTAL:    87715       TOTAL SWAP PSS:       42
+ 
+ Objects
+               Views:       67         ViewRootImpl:        2
+         AppContexts:        5           Activities:        1
+              Assets:       17        AssetManagers:        0
+       Local Binders:       27        Proxy Binders:       48
+       Parcel memory:        5         Parcel count:       20
+    Death Recipients:        0      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 

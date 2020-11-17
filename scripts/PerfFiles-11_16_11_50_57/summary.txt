@@ -1,0 +1,53 @@
+React Native Views with instance reuse.
+
+Total PSS 	 13258
+Total PSS 	 60718
+Total PSS 	 67407
+Total PSS 	 72502
+Total PSS 	 81053
+Total PSS 	 79781
+Total PSS 	 86366
+Total PSS 	 90954
+Total PSS 	 75647
+Total PSS 	 82487
+Total PSS 	 87715
+
+Java Heap 	 1904
+Java Heap 	 4172
+Java Heap 	 5072
+Java Heap 	 4336
+Java Heap 	 4108
+Java Heap 	 4064
+Java Heap 	 5024
+Java Heap 	 4408
+Java Heap 	 4184
+Java Heap 	 4332
+Java Heap 	 4480
+
+Native Heap 	 3424
+Native Heap 	 14008
+Native Heap 	 15924
+Native Heap 	 18212
+Native Heap 	 20160
+Native Heap 	 22176
+Native Heap 	 23336
+Native Heap 	 24888
+Native Heap 	 19120
+Native Heap 	 22028
+Native Heap 	 23428
+
+Private Other 	 1280
+Private Other 	 13552
+Private Other 	 17272
+Private Other 	 20816
+Private Other 	 24756
+Private Other 	 21632
+Private Other 	 25908
+Private Other 	 29544
+Private Other 	 20184
+Private Other 	 23948
+Private Other 	 27628
+
+
+
+

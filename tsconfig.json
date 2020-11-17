@@ -3,15 +3,13 @@
         "allowSyntheticDefaultImports": true,
         "target": "es6",
         "noUnusedLocals": true,
-        "module": "commonjs",
-        "noEmit": true,  
+        "module": "esnext",
         "moduleResolution": "node",
         "outDir": "built",
         "sourceMap": true,
         "inlineSources": true,
         "strict": true,
-        "jsx": "react-native", // This is not great considering that this project has web code too. Ideally the RN code should be refactored out to sub projects.
-        "esModuleInterop": true                   /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+        "jsx": "react-native"
     },
     "include": [
         "src/**/*"

@@ -1,0 +1,93 @@
+Web Views.
+
+Total PSS 	 13231
+Total PSS 	 57083
+Total PSS 	 58769
+Total PSS 	 59872
+Total PSS 	 63122
+Total PSS 	 63913
+Total PSS 	 65603
+Total PSS 	 66503
+Total PSS 	 67691
+Total PSS 	 68880
+Total PSS 	 69900
+
+Java Heap 	 1904
+Java Heap 	 3404
+Java Heap 	 3068
+Java Heap 	 3068
+Java Heap 	 3040
+Java Heap 	 3068
+Java Heap 	 3092
+Java Heap 	 3084
+Java Heap 	 3112
+Java Heap 	 3116
+Java Heap 	 3160
+
+Native Heap 	 3404
+Native Heap 	 12160
+Native Heap 	 13432
+Native Heap 	 14484
+Native Heap 	 15232
+Native Heap 	 16012
+Native Heap 	 17320
+Native Heap 	 18136
+Native Heap 	 19192
+Native Heap 	 20000
+Native Heap 	 20860
+
+Private Other 	 1292
+Private Other 	 2964
+Private Other 	 2948
+Private Other 	 2896
+Private Other 	 2912
+Private Other 	 2932
+Private Other 	 2928
+Private Other 	 2920
+Private Other 	 2924
+Private Other 	 2924
+Private Other 	 2936
+
+Webview Sandbox Total PSS 	 76606
+Webview Sandbox Total PSS 	 84144
+Webview Sandbox Total PSS 	 78608
+Webview Sandbox Total PSS 	 95071
+Webview Sandbox Total PSS 	 82189
+Webview Sandbox Total PSS 	 80475
+Webview Sandbox Total PSS 	 85209
+Webview Sandbox Total PSS 	 106685
+Webview Sandbox Total PSS 	 93249
+Webview Sandbox Total PSS 	 101853
+
+Webview Sandbox Java Heap 	 880
+Webview Sandbox Java Heap 	 2804
+Webview Sandbox Java Heap 	 2804
+Webview Sandbox Java Heap 	 2804
+Webview Sandbox Java Heap 	 2804
+Webview Sandbox Java Heap 	 2808
+Webview Sandbox Java Heap 	 2804
+Webview Sandbox Java Heap 	 2804
+Webview Sandbox Java Heap 	 2804
+Webview Sandbox Java Heap 	 2804
+
+Webview Sandbox Native Heap 	 12108
+Webview Sandbox Native Heap 	 9492
+Webview Sandbox Native Heap 	 10648
+Webview Sandbox Native Heap 	 11056
+Webview Sandbox Native Heap 	 11068
+Webview Sandbox Native Heap 	 10436
+Webview Sandbox Native Heap 	 11656
+Webview Sandbox Native Heap 	 12360
+Webview Sandbox Native Heap 	 12740
+Webview Sandbox Native Heap 	 12392
+
+Webview Sandbox Private Other 	 32868
+Webview Sandbox Private Other 	 39980
+Webview Sandbox Private Other 	 33276
+Webview Sandbox Private Other 	 49316
+Webview Sandbox Private Other 	 36412
+Webview Sandbox Private Other 	 35308
+Webview Sandbox Private Other 	 38812
+Webview Sandbox Private Other 	 59568
+Webview Sandbox Private Other 	 45736
+Webview Sandbox Private Other 	 54604
